@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Epic Scores Live — Christian Grosselfinger</title>
+<meta content="Epic Scores Live — les plus grandes bandes originales de films et de jeux vidéo, interprétées au violoncelle, à la guitare électrique et aux claviers. Un orchestre à lui seul qui peut devenir un groupe complet." name="description"/>
+<!-- v2 — rebuilt on the Home/index_v3 design system (18 Aug 2026).
+     epic-scores.html is kept untouched as the previous reference. -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --cream:#FBF7EF;
+  --cream-2:#F4EDE1;
+  --ink:#2E2422;
+  --rule:#E2D5BE;
+  --gold:#B8873B;
+  --gold-lt:#D4AC6A;
+  --maxw:1180px;
+}
+
+/* ═══════════ PROJECT PALETTES ═══════════
+   Identical block to Home/index_v3.html — one palette per show, sampled from the
+   logo artwork. Put the matching .pal-* class on <body> and the whole page inherits
+   the right colours. Roles:
+     --p-deep  darkest ground      --p-mid   structural mid tone
+     --p-metal material accent     --p-metal-lt  its highlight
+     --p-key   identifying hue     --p-key-lt    its light form
+     --p-text  body copy           --p-card  card ground                          */
+
+/* CELLO STORM — black, grey, red + gold detail */
+.pal-storm{
+  --p-deep:#0C0C0C;   --p-mid:#1A1A19;
+  --p-metal:#AAAAA5;  --p-metal-lt:#A8793C;
+  --p-key:#E33134;    --p-key-lt:#EC7375;
+  --p-text:#C2C2BE;   --p-card:#0C0C0C;
+}
+/* EPIC SCORES — blue, metallic grey */
+.pal-epic{
+  --p-head:#EDF3F7; --p-line:rgba(255,255,255,.12); --p-panel:rgba(255,255,255,.03); --p-tint:rgba(46,111,145,.2);
+  --p-deep:#050E1E;   --p-mid:#12293C;
+  --p-metal:#70848C;  --p-metal-lt:#C0D1D6;   /* the chrome in the logo */
+  --p-key:#2E6F91;    --p-key-lt:#7FC2E3;
+  --p-text:#C6D5DD;   --p-card:#0F3B5C;
+}
+/* ROMANTIC CELLO — cream, gold, wine-brown */
+.pal-romantic{
+  --p-deep:#561118;   --p-mid:#3E0C11;
+  --p-metal:#A8793C;  --p-metal-lt:#C6A880;
+  --p-key:#7B454B;    --p-key-lt:#93676B;
+  --p-text:#67292F;   --p-card:#FCF4E5;   --p-cream:#F4EDE1;
+}
+
+html{background:var(--p-deep);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;color:var(--p-text);background:var(--p-deep);
+  line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;line-height:1.2}
+p{margin-bottom:1.05em;font-weight:300;font-size:16.5px;color:var(--p-text)}
+a{color:var(--p-key-lt)}
+
+.sec-label{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.4vw,38px);
+  letter-spacing:.22em;text-transform:uppercase;color:#EDF3F7;margin-bottom:6px}
+.sec-rule{width:88px;height:1px;background:var(--p-key);margin-bottom:32px}
+.center{text-align:center}
+.center .sec-rule{margin-left:auto;margin-right:auto}
+section{padding:clamp(64px,9vw,104px) 0}
+.alt{background:var(--p-mid)}
+
+/* ═══ HERO ═══
+   Two bands: a solid bar for the back link, language switch and nav; then the
+   photo — this shot is a portrait (1200×1800), so it's shown whole via
+   background-size:contain on a tall navy ground rather than cropped to fill a
+   landscape strip. The logo sits in that guaranteed-empty navy margin, top
+   right, so it never has a chance to land on a face. Caption band follows. */
+.hero{position:relative;background:var(--p-deep)}
+.hero-topbar{position:relative;z-index:5;background:var(--p-deep);
+  border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar-row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:18px 28px}
+.topbar-back{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--p-metal-lt);text-decoration:none;transition:color .2s ease}
+.topbar-back:hover{color:#fff}
+.topbar-right{display:flex;align-items:center;gap:16px}
+
+.hero-photo{position:relative;height:min(88svh,880px);background:var(--p-deep)}
+.hero-bg{position:absolute;inset:0;
+  background:url('/assets/Pics/Epic%20Scores/Chris/20260320_IMG_3594-web.jpg') center/contain no-repeat}
+.hero-photo-logo{position:absolute;top:clamp(24px,4vh,40px);right:clamp(24px,4vw,54px);
+  width:min(220px,30vw);height:auto;
+  filter:drop-shadow(0 0 6px rgba(0,0,0,.8)) drop-shadow(0 6px 20px rgba(0,0,0,.6))}
+
+/* a plain, solid band — no gradient needed, because it isn't sitting on the
+   photo. A title-card eyebrow (flanking rules, no clip-art perforations)
+   above the tagline, with the scroll cue closing the stack. */
+.hero-caption{padding:clamp(48px,7vh,72px) 24px;text-align:center}
+.film-badge{font-size:11px;letter-spacing:.34em;text-transform:uppercase;font-weight:600;
+  color:var(--p-metal-lt);margin:0 0 22px}
+.hero-role{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
+  font-size:clamp(22px,3vw,32px);color:#F6FAFD;line-height:1.28;margin:0 auto 34px;max-width:42ch}
+.hero-scroll{margin:0;color:var(--p-metal-lt);font-size:13px;text-align:center;font-weight:500;
+  letter-spacing:.24em;text-transform:uppercase;display:inline-block}
+.hero-scroll span{display:block;margin-top:10px;font-size:20px;animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* ═══ BUTTONS ═══ */
+.btn-row{display:flex;flex-wrap:wrap;gap:13px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;
+  border:1px solid var(--p-metal);color:var(--p-metal-lt);text-decoration:none;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;background:transparent;
+  transition:all .25s ease}
+.btn:hover{border-color:var(--p-key-lt);color:#fff;background:rgba(255,255,255,.04)}
+.btn.key{background:var(--p-key);border-color:var(--p-key);color:#fff}
+.btn.key:hover{filter:brightness(1.15);color:#fff}
+.hero .btn{backdrop-filter:blur(2px);box-shadow:0 6px 22px rgba(0,0,0,.5)}
+
+/* ═══ THE SHOW ═══ */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,6vw,68px);align-items:center}
+/* the same metallic frame as the hub's door cards: a corner-to-corner gradient with a
+   bright band through the middle reads as a sheen on metal, not a flat outline */
+.framed{border:3px solid transparent;border-image-slice:1;
+  border-image-source:linear-gradient(140deg,var(--p-key) 0%,var(--p-deep) 24%,
+    var(--p-metal-lt) 50%,var(--p-deep) 76%,var(--p-key) 100%);
+  box-shadow:0 18px 46px rgba(0,0,0,.5);display:block}
+.split .col-img img{width:100%;height:auto;display:block}
+p.lead{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,26px);
+  font-style:italic;color:var(--p-key-lt);font-weight:300;line-height:1.45}
+strong{font-weight:500;color:#EDF3F7}
+em{color:var(--p-metal-lt);font-style:italic}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:clamp(38px,5vw,60px)}
+.stat{border:1px solid rgba(255,255,255,.1);padding:20px 18px;background:rgba(255,255,255,.02)}
+.stat-k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--p-key-lt);margin-bottom:8px}
+.stat-v{font-family:'Cormorant Garamond',serif;font-size:19px;color:#EDF3F7;line-height:1.3}
+
+/* ═══ WATCH ═══ */
+.vid-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.vid{position:relative;display:block;overflow:hidden;text-decoration:none;
+  aspect-ratio:16/10;transition:transform .35s ease,box-shadow .35s ease}
+.vid img{width:100%;height:100%;object-fit:cover;opacity:.72;transition:opacity .4s ease,transform .6s ease}
+.vid .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.vid .play span{width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.5);
+  border:1px solid var(--p-metal-lt);display:flex;align-items:center;justify-content:center;
+  transition:all .3s ease}
+.vid .play span::after{content:"";border-left:16px solid var(--p-metal-lt);
+  border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:5px}
+.vid:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(0,0,0,.6),
+  0 0 0 1px rgba(127,194,227,.5),0 0 40px rgba(46,111,145,.55)}
+.vid:hover img{opacity:.95;transform:scale(1.04)}
+.vid:hover .play span{background:var(--p-key);border-color:var(--p-key)}
+.vid:hover .play span::after{border-left-color:#fff}
+
+/* ═══ SET LIST ═══ */
+.set{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(6,auto);grid-auto-flow:column;gap:0 46px}
+.set-item{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:baseline;
+  padding:13px 6px;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none;
+  transition:background-color .25s ease,padding-left .25s ease}
+.set-item:hover{background:rgba(46,111,145,.14);padding-left:14px}
+a.set-item:hover .set-t{color:var(--p-key-lt)}
+.set-n{font-size:11px;color:var(--p-key-lt);letter-spacing:.08em}
+.set-t{font-family:'Cormorant Garamond',serif;font-size:19px;color:#EDF3F7}
+.set-a{font-size:12px;color:var(--p-metal);text-align:right}
+.note{margin-top:28px;color:var(--p-metal);font-style:italic;font-size:15px}
+
+/* ═══ FOR VENUES ═══ */
+.spec{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.1);margin-top:26px}
+.spec-item{background:var(--p-deep);padding:22px 20px}
+.alt .spec-item{background:var(--p-mid)}
+.spec-k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--p-key-lt);margin-bottom:9px}
+.spec-v{font-size:14.5px;font-weight:300;color:var(--p-text);line-height:1.5}
+
+/* ═══ LISTEN ═══ */
+.links{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.link-card{display:flex;align-items:center;justify-content:center;padding:20px 14px;
+  border:1px solid rgba(255,255,255,.14);color:var(--p-text);text-decoration:none;
+  text-align:center;font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;
+  transition:all .25s ease}
+.link-card:hover{border-color:var(--p-key-lt);color:#fff;transform:translateY(-2px);
+  background:rgba(255,255,255,.04)}
+
+/* ═══ FOOTER ═══ */
+footer{background:#03080F;color:#8E9BA5;text-align:center;padding:62px 0 46px}
+footer .fname{width:230px;height:auto;opacity:.9;margin-bottom:22px;
+  transition:opacity .3s ease,transform .3s ease}
+.fname-link{display:inline-block;text-decoration:none}
+.fname-link:hover .fname{opacity:1;transform:scale(1.03)}
+footer a{color:var(--gold-lt);text-decoration:none}
+footer a:hover{text-decoration:underline}
+.fmeta{font-size:13.5px;line-height:2;font-weight:300}
+.fcopy{margin-top:26px;font-size:11px;letter-spacing:.1em;color:#6D7C87;text-transform:uppercase}
+.fcopy a{color:#6D7C87;text-decoration:none;transition:color .25s ease}
+.fcopy a:hover{color:var(--gold-lt);text-decoration:none}
+.fcopy a.here{color:var(--p-key-lt)}
+
+
+
+/* ═══ LANGUAGE SELECTOR ═══
+   DESIGN ONLY for now — every flag points at "#". Wix Multilingual (or whichever
+   route we choose) will supply the real per-language URLs. */
+.langs{display:flex;gap:8px;align-items:center;padding:5px 9px;border-radius:20px;
+  background:rgba(8,8,10,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.langs .lang{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border-radius:2px;
+  border:1px solid transparent;text-decoration:none;line-height:1;
+  transition:border-color .25s ease,background-color .25s ease,opacity .25s ease;opacity:.72}
+.langs .lang svg{width:19px;height:13px;display:block;border-radius:1px;flex:0 0 auto;
+  box-shadow:0 0 0 1px rgba(0,0,0,.28)}
+.langs .lang span{font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--p-metal-lt)}
+.langs .lang:hover{opacity:1;border-color:var(--p-metal);background:rgba(255,255,255,.07)}
+.langs .lang.is-current{opacity:1;border-color:var(--p-key)}
+
+/* ═══ PAGE NAV — jump links to this page's own sections ═══ */
+.page-nav-wrap{margin-top:10px;padding-bottom:16px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.page-nav-wrap::-webkit-scrollbar{display:none}
+.page-nav{display:inline-flex;gap:2px;padding:5px 7px;border-radius:20px;width:max-content;
+  background:rgba(8,8,10,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.page-nav a{flex:0 0 auto;padding:6px 13px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--p-metal-lt);text-decoration:none;white-space:nowrap;border-radius:14px;
+  transition:background-color .2s ease,color .2s ease}
+.page-nav a:hover{background:rgba(255,255,255,.1);color:var(--p-head)}
+
+/* mobile menu — checkbox-driven, no JS. Burger replaces the pill row under 560px;
+   the overlay is fixed to the viewport so hero-back's own positioning doesn't matter. */
+.nav-toggle-cb{position:absolute;opacity:0;pointer-events:none}
+.nav-burger{display:none;width:56px;height:56px;border-radius:50%;align-items:center;justify-content:center;
+  background:rgba(8,8,10,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  cursor:pointer;font-size:26px;color:var(--p-metal-lt);line-height:1}
+.nav-overlay{display:none;position:fixed;inset:0;z-index:30;background:var(--p-deep);
+  flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.nav-overlay a{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(24px,7vw,32px);
+  color:var(--p-head);text-decoration:none;padding:14px 24px}
+.nav-overlay a:active{color:var(--p-key-lt)}
+.nav-close{position:absolute;top:24px;right:26px;font-size:30px;color:var(--p-metal-lt);
+  cursor:pointer;line-height:1}
+.nav-toggle-cb:checked ~ .nav-overlay{display:flex}
+.nav-toggle-cb:focus-visible ~ .nav-burger{outline:2px solid var(--p-key-lt);outline-offset:2px}
+
+/* ═══ MEDIA ═══ */
+/* column count is set per page so the images divide evenly and leave no hole */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gal a{position:relative;display:block;overflow:hidden;background:var(--p-mid);
+  transition:transform .35s ease,box-shadow .35s ease}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease,opacity .3s ease}
+.gal a{aspect-ratio:1/1}
+.gal a:hover{transform:translateY(-4px);z-index:2;
+  box-shadow:0 20px 44px rgba(0,0,0,.4),0 0 0 1px var(--p-metal)}
+.gal a:hover img{transform:scale(1.06)}
+
+/* ═══ SHOWS (agenda) ═══ */
+.ag{max-width:880px;margin:0 auto}
+.ag-row{display:grid;grid-template-columns:124px 1fr auto;gap:22px;align-items:center;
+  padding:15px 14px;border-bottom:1px solid var(--p-line);border-radius:3px;
+  transition:background-color .3s ease,box-shadow .3s ease,transform .3s ease}
+.ag-row:first-child{border-top:1px solid var(--p-line)}
+.ag-date{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--p-metal);
+  letter-spacing:.05em;white-space:nowrap}
+.ag-venue{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--p-head);line-height:1.25}
+.ag-city{font-size:12.5px;color:var(--p-metal);margin-top:2px}
+.ag-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;
+  border:1px solid var(--p-line);color:var(--p-metal);white-space:nowrap;border-radius:2px;
+  text-decoration:none;display:inline-block;transition:all .3s ease}
+/* this page's own dates are the point of the section — everything else recedes */
+.ag-row.mine{background:var(--p-tint);box-shadow:inset 3px 0 0 var(--p-key)}
+.ag-row.mine .ag-tag{background:var(--p-deep);color:var(--p-metal-lt);border-color:var(--p-key)}
+.ag-row:not(.mine){opacity:.62}
+.ag-row:not(.mine):hover{opacity:1;background:var(--p-panel)}
+/* AGENDA-CSS-START */
+.ag-actions{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.ag-ticket{font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border-radius:2px;background:var(--p-key);color:#fff;border:1px solid var(--p-key);text-decoration:none;white-space:nowrap}
+.ag-ticket.off{background:transparent;color:var(--p-metal);border-color:var(--p-line)}
+.ag-row:not(.mine) .ag-ticket{opacity:.9}
+@media(max-width:560px){.ag-actions{justify-content:flex-start;margin-top:7px}.ag-tag{margin-top:0}}
+/* AGENDA-CSS-END */
+.ag-note{text-align:center;margin-top:28px;color:var(--p-metal);font-style:italic;font-size:15px}
+
+/* ═══ MAILING LIST ═══ */
+.ml{max-width:720px;margin:0 auto;text-align:center;padding:clamp(30px,4vw,46px) clamp(22px,4vw,44px);
+  border:1px solid var(--p-line);background:var(--p-panel)}
+.ml p{max-width:52ch;margin:0 auto 22px}
+.ml-form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.ml-form input[type=email]{flex:1 1 300px;max-width:380px;padding:14px 16px;font-family:'Inter',sans-serif;
+  font-size:14px;color:var(--p-head);background:transparent;border:1px solid var(--p-line);border-radius:2px}
+.ml-form input[type=email]::placeholder{color:var(--p-metal)}
+.ml-form input[type=email]:focus{outline:none;border-color:var(--p-key-lt)}
+.ml-form button{padding:14px 30px;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;cursor:pointer;background:var(--p-key);color:#fff;border:1px solid var(--p-key);
+  border-radius:2px;transition:filter .25s ease}
+.ml-form button:hover{filter:brightness(1.18)}
+.ml-small{margin:16px 0 0;font-size:12px;color:var(--p-metal)}
+/* Mailchimp's bot trap: must stay in the DOM and stay off-screen */
+.ml-hp{position:absolute;left:-5000px}
+
+@media(max-width:900px){
+  .gal{grid-template-columns:repeat(3,1fr)}
+  .ag-row{grid-template-columns:110px 1fr auto;gap:14px}
+}
+@media(max-width:560px){
+  .gal{grid-template-columns:repeat(2,1fr);gap:10px}
+  .ag-row{grid-template-columns:1fr;gap:5px;padding:14px 12px}
+  .ag-tag{justify-self:start;margin-top:7px}
+  .ml-form input[type=email]{flex:1 1 100%}
+  .ml-form button{width:100%}
+}
+
+/* ── tablet ── */
+@media(max-width:900px){
+  .split{grid-template-columns:1fr;gap:32px}
+  .stats{grid-template-columns:1fr 1fr}
+  .spec{grid-template-columns:1fr 1fr}
+  .vid-grid{grid-template-columns:1fr}
+  .links{grid-template-columns:repeat(3,1fr)}
+  section{padding:60px 0}
+}
+/* ── phone ── */
+@media(max-width:560px){
+  .wrap{padding:0 20px}
+  .hero-photo{height:64svh}
+  .hero-photo-logo{width:min(140px,34vw);top:16px;right:16px}
+  /* back link + langs/burger is tight on a phone-width bar — let it wrap
+     rather than force horizontal overflow */
+  .topbar-row{flex-wrap:wrap;row-gap:10px;padding:18px 20px}
+  .topbar-back{font-size:10px}
+  /* the pill row gives way to a full-screen menu here — easier to hit with a thumb
+     than a small scrolling row of tabs */
+  .page-nav-wrap{display:none}
+  .nav-burger{display:flex}
+  .hero-caption{padding:32px 20px}
+  .film-badge{margin-bottom:14px}
+  .hero-role{margin-bottom:22px}
+  .hero-role{font-size:clamp(17px,4.5vw,21px)}
+  .hero-scroll{font-size:13.7px;letter-spacing:.16em}
+  .hero-scroll span{font-size:21px}
+  .sec-label{letter-spacing:.16em}
+  .stats,.spec{grid-template-columns:1fr}
+  .set{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}
+  .links{grid-template-columns:1fr 1fr}
+  .btn{flex:1 1 auto;justify-content:center;padding:13px 18px;font-size:11px}
+}
+@media(hover:none){
+  .vid:hover{transform:none;box-shadow:none}
+  .vid:hover img{transform:none;opacity:.72}
+  .link-card:hover{transform:none}
+}
+</style>
+<link rel="alternate" hreflang="en" href="https://epicscores.christiangrosselfinger.com/" /><link rel="alternate" hreflang="fr" href="https://epicscores.christiangrosselfinger.com/fr/" /><link rel="alternate" hreflang="de" href="https://epicscores.christiangrosselfinger.com/de/" /><link rel="alternate" hreflang="pt" href="https://epicscores.christiangrosselfinger.com/pt/" /><link rel="alternate" hreflang="x-default" href="https://epicscores.christiangrosselfinger.com/" /></head>
+<body class="pal-epic">
+<!-- ════════ HERO ════════ -->
+<header class="hero">
+<div class="hero-topbar">
+<input class="nav-toggle-cb" id="nav-toggle" type="checkbox"/>
+<div class="wrap topbar-row">
+<a class="topbar-back" href="https://christiangrosselfinger.github.io/fr/">← Tous les concerts</a>
+<div class="topbar-right">
+<div class="langs"><a aria-label="English" class="lang" href="/" hreflang="en" lang="en" title="English"><svg aria-hidden="true" viewbox="0 0 60 40"><rect fill="#012169" height="40" width="60"></rect><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="8"></path><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"></path><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="13"></path><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="8"></path></svg><span>EN</span></a><a aria-label="Français" class="lang is-current" href="/fr/" hreflang="fr" lang="fr" title="Français"><svg aria-hidden="true" viewbox="0 0 60 40"><rect fill="#0055A4" height="40" width="20"></rect><rect fill="#fff" height="40" width="20" x="20"></rect><rect fill="#EF4135" height="40" width="20" x="40"></rect></svg><span>FR</span></a><a aria-label="Deutsch" class="lang" href="/de/" hreflang="de" lang="de" title="Deutsch"><svg aria-hidden="true" viewbox="0 0 60 40"><rect fill="#000" height="13.34" width="60"></rect><rect fill="#DD0000" height="13.33" width="60" y="13.34"></rect><rect fill="#FFCE00" height="13.33" width="60" y="26.67"></rect></svg><span>DE</span></a><a aria-label="Português" class="lang" href="/pt/" hreflang="pt" lang="pt" title="Português"><svg aria-hidden="true" viewbox="0 0 60 40"><rect fill="#DA291C" height="40" width="60"></rect><rect fill="#046A38" height="40" width="24"></rect><circle cx="24" cy="20" fill="#FFE900" r="7.5" stroke="#fff" stroke-width="1.4"></circle></svg><span>PT</span></a></div>
+<label aria-label="Menu" class="nav-burger" for="nav-toggle">☰</label>
+</div>
+</div>
+<div class="wrap page-nav-wrap"><nav class="page-nav">
+<a href="#show">Concert</a><a href="#watch">Vidéos</a><a href="#setlist">Programme</a>
+<a href="#media">Médias</a><a href="#shows">Dates</a><a href="#subscribe">S’abonner</a>
+<a href="#venues">Salles</a><a href="#listen">Suivre</a>
+</nav></div>
+<div class="nav-overlay" onclick="if(event.target.tagName==='A')document.getElementById('nav-toggle').checked=false">
+<label aria-label="Fermer le menu" class="nav-close" for="nav-toggle">✕</label>
+<a href="#show">Concert</a><a href="#watch">Vidéos</a><a href="#setlist">Programme</a>
+<a href="#media">Médias</a><a href="#shows">Dates</a><a href="#subscribe">S’abonner</a>
+<a href="#venues">Salles</a><a href="#listen">Suivre</a>
+</div>
+</div>
+<div class="hero-photo">
+<div class="hero-bg"></div>
+<img alt="Epic Scores Live" class="hero-photo-logo" src="/images/logo-epicscores.png"/>
+</div>
+<div class="hero-caption">
+<p class="film-badge">Cinéma · Jeux vidéo</p>
+<p class="hero-role">Un orchestre à lui seul — ou davantage, quand la scène le permet.</p>
+<p class="hero-scroll">Le concert<span>↓</span></p>
+</div>
+</header>
+<!-- ════════ THE SHOW ════════ -->
+<section id="show">
+<div class="wrap">
+<div class="split">
+<div>
+<div class="sec-label">Le concert</div>
+<div class="sec-rule"></div>
+<p class="lead">Un voyage cinématographique en musique — adapté à la salle, d’un musicien seul à un groupe complet.</p>
+<p><strong>Epic Scores Live</strong> est une soirée consacrée aux plus belles musiques jamais écrites pour l’écran : <em>Interstellar</em>, <em>Wonder Woman</em>, <em>The Legend of Zelda</em>, et ces thèmes que le public porte en lui depuis l’enfance.</p>
+<p>Christian Grosselfinger les interprète au <strong>violoncelle, à la guitare électrique et aux claviers</strong>, portant tout l’orchestre sur scène — cordes, rythme, contre-mélodie — jusqu’à ce qu’un seul musicien sonne comme une partition complète. La formation est flexible : en solo par défaut, et elle s’agrandit lorsque le lieu le permet — un batteur d’abord, puis d’autres musiciens selon les conditions. Sebastian Schneider et Aileen Schneider sont ses premiers choix, avec des musiciens locaux bienvenus s’ils ne peuvent pas venir.</p>
+<p>C’est une soirée de nostalgie, de puissance et d’émotion, où le son et la narration se rencontrent. Les gamers reconnaissent la première mesure. Les cinéphiles reconnaissent la deuxième. Tout le monde reconnaît l’émotion.</p>
+<p><strong>Idéal pour</strong> les cinémas, théâtres, centres culturels, conventions de jeux vidéo et festivals — partout où une salle peut s’assombrir et emmener le public ailleurs.</p>
+</div>
+<div class="col-img">
+<img alt="Christian Grosselfinger en concert — Epic Scores Live" class="framed" src="/assets/Pics/Epic%20Scores/Chris/20260320_IMG_3475-web.jpg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════ WATCH ════════ -->
+<section class="alt" id="watch">
+<div class="wrap">
+<div class="center">
+<div class="sec-label">Vidéos</div>
+<div class="sec-rule"></div>
+</div>
+<div class="vid-grid">
+<!-- YouTube's own thumbnails: always the real frame for that video -->
+<a class="vid framed" href="https://youtu.be/pfcqdkxIeLo" rel="noopener" target="_blank">
+<img alt="Epic Scores Live" src="https://img.youtube.com/vi/pfcqdkxIeLo/maxresdefault.jpg"/><span class="play"><span></span></span></a>
+<a class="vid framed" href="https://youtu.be/U5JLEkP0eV8" rel="noopener" target="_blank">
+<img alt="Epic Scores Live" src="https://img.youtube.com/vi/U5JLEkP0eV8/maxresdefault.jpg"/><span class="play"><span></span></span></a>
+</div>
+<div class="btn-row" style="justify-content:center;margin-top:28px">
+<a class="btn" href="https://www.youtube.com/c/ChristianGrosselfinger" rel="noopener" target="_blank">Plus sur YouTube</a>
+</div>
+</div>
+</section>
+<!-- ════════ SET LIST ════════ -->
+<section id="setlist">
+<div class="wrap">
+<div class="center">
+<div class="sec-label">Programme</div>
+<div class="sec-rule"></div>
+</div>
+<div class="set">
+<a class="set-item" href="https://youtu.be/pfcqdkxIeLo" rel="noopener" target="_blank"><span class="set-n">01</span><span class="set-t">Wonder Woman</span><span class="set-a">Hans Zimmer</span></a>
+<a class="set-item" href="https://youtu.be/U5JLEkP0eV8" rel="noopener" target="_blank"><span class="set-n">02</span><span class="set-t">Interstellar</span><span class="set-a">Hans Zimmer</span></a>
+<div class="set-item"><span class="set-n">03</span><span class="set-t">Chariots of Fire</span><span class="set-a">Vangelis</span></div>
+<div class="set-item"><span class="set-n">04</span><span class="set-t">Terminator</span><span class="set-a">Brad Fiedel</span></div>
+<div class="set-item"><span class="set-n">05</span><span class="set-t">Mombasa / Inception</span><span class="set-a">Hans Zimmer</span></div>
+<div class="set-item"><span class="set-n">06</span><span class="set-t">Mario</span><span class="set-a">Koji Kondo</span></div>
+<div class="set-item"><span class="set-n">07</span><span class="set-t">Korobeiniki / Tetris</span><span class="set-a">Hirokazu Tanaka</span></div>
+<div class="set-item"><span class="set-n">08</span><span class="set-t">Time / Inception</span><span class="set-a">Hans Zimmer</span></div>
+<div class="set-item"><span class="set-n">09</span><span class="set-t">Pirates of the Caribbean</span><span class="set-a">Hans Zimmer</span></div>
+<div class="set-item"><span class="set-n">10</span><span class="set-t">Game of Thrones</span><span class="set-a">Ramin Djawadi</span></div>
+<div class="set-item"><span class="set-n">11</span><span class="set-t">Zelda</span><span class="set-a">Koji Kondo</span></div>
+</div>
+</div>
+</section>
+<!-- ════════ MEDIA ════════ -->
+<section id="media">
+<div class="wrap">
+<div class="center">
+<div class="sec-label">Médias</div>
+<div class="sec-rule"></div>
+</div>
+<div class="gal">
+<a href="/assets/Pics/Epic%20Scores/Chris/20260320_IMG_3419-web.jpg" rel="noopener" target="_blank"><img alt="Epic Scores Live" loading="lazy" src="/assets/Pics/Epic%20Scores/Chris/20260320_IMG_3419-web.jpg"/></a>
+<a href="/assets/Pics/Epic%20Scores/Chris/20260320_IMG_3609-web.jpg" rel="noopener" target="_blank"><img alt="Epic Scores Live" loading="lazy" src="/assets/Pics/Epic%20Scores/Chris/20260320_IMG_3609-web.jpg"/></a>
+<a href="/assets/Pics/Epic%20Scores/Highlights%20All%20band/20260320_IMG_3611-web.jpg" rel="noopener" target="_blank"><img alt="Epic Scores Live" loading="lazy" src="/assets/Pics/Epic%20Scores/Highlights%20All%20band/20260320_IMG_3611-web.jpg"/></a>
+<a href="/assets/Pics/Epic%20Scores/Highlights%20All%20band/20260320_IMG_3679-web.jpg" rel="noopener" target="_blank"><img alt="Epic Scores Live" loading="lazy" src="/assets/Pics/Epic%20Scores/Highlights%20All%20band/20260320_IMG_3679-web.jpg"/></a>
+<a href="/assets/Pics/Epic%20Scores/Aileen/20260320_IMG_3439-web.jpg" rel="noopener" target="_blank"><img alt="Epic Scores Live" loading="lazy" src="/assets/Pics/Epic%20Scores/Aileen/20260320_IMG_3439-web.jpg"/></a>
+<a href="/assets/Pics/Epic%20Scores/Sebastian/20260320_IMG_3521-web.jpg" rel="noopener" target="_blank"><img alt="Epic Scores Live" loading="lazy" src="/assets/Pics/Epic%20Scores/Sebastian/20260320_IMG_3521-web.jpg"/></a>
+</div>
+</div>
+</section>
+<!-- ════════ SHOWS ════════ -->
+<section class="alt" id="shows">
+<div class="wrap">
+<div class="center">
+<div class="sec-label">Dates</div>
+<div class="sec-rule"></div>
+</div>
+<div class="ag">
+<div class="ag-row">
+<div class="ag-date">19 janv. 2027</div>
+<div><div class="ag-venue">Café Galao</div><div class="ag-city">Stuttgart · Allemagne · 20:30</div><div class="ag-city">Entrée libre · dons bienvenus</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-stuttgart-cello-rock-pop-tickets-2004357628623" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">26 janv. 2027</div>
+<div><div class="ag-venue">PARKS im Stadtpark</div><div class="ag-city">Nuremberg · Allemagne · 19:30</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-nurnberg-cello-rock-pop-tickets-2003761313027" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row mine">
+<div class="ag-date">27 janv. 2027</div>
+<div><div class="ag-venue">PARKS im Stadtpark</div><div class="ag-city">Nuremberg · Allemagne · 19:30</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://epicscores.christiangrosselfinger.com/fr/">Epic Scores</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/epic-scores-live-in-nurnberg-film-game-musik-live-tickets-2003761322054" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">28 janv. 2027</div>
+<div><div class="ag-venue">Klub FAMU</div><div class="ag-city">Prague · République tchèque · 19:00</div><div class="ag-city">Avec Taste The Lemon · entrée 12 € (300 Kč) sur place, réservation gratuite en ligne</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-prague-cello-rock-pop-tickets-2004818481045" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">30 janv. 2027</div>
+<div><div class="ag-venue">Zimmer 16</div><div class="ag-city">Berlin · Allemagne · 20:00</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-berlin-cello-rock-pop-tickets-2003761325063" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">31 janv. 2027</div>
+<div><div class="ag-venue">Fazenda da Esperança – Gut Neuhof</div><div class="ag-city">Nauen · Allemagne · 18:00</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-nauen-cello-rock-pop-tickets-2004491559213" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">3 févr. 2027</div>
+<div><div class="ag-venue">Cellebroederskapel</div><div class="ag-city">Maastricht · Pays-Bas · 19:30</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/romantic-cello-in-maastricht-solocello-orkestbegeleiding-tickets-2001316669031" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">4 févr. 2027</div>
+<div><div class="ag-venue">Christusgemeente (VPKB Antwerpen-Oost)</div><div class="ag-city">Anvers · Belgique · 20:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/romantic-cello-in-antwerpen-solocello-orkestbegeleiding-tickets-2003146117962" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">7 févr. 2027</div>
+<div><div class="ag-venue">The Cavendish Arms</div><div class="ag-city">Londres · Royaume-Uni · 15:00</div><div class="ag-city">Avec Xylaroo</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/romantic-cello-in-london-with-xylaroo-solo-cello-orchestral-arrangements-tickets-2004359108048" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">11 févr. 2027</div>
+<div><div class="ag-venue">Chapel Street Arts Centre</div><div class="ag-city">Derby · Royaume-Uni · 19:30</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-derby-cello-rock-pop-tickets-2004360691785" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">13 févr. 2027</div>
+<div><div class="ag-venue">Matt &amp; Phred's</div><div class="ag-city">Manchester · Royaume-Uni · 19:00</div><div class="ag-city">Billets via le lieu — lien bientôt disponible</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <span class="ag-ticket off">Via le lieu</span></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">15 févr. 2027</div>
+<div><div class="ag-venue">The Brunswick</div><div class="ag-city">Hove (Brighton) · Royaume-Uni · 19:30</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-brighton-cello-rock-pop-tickets-2004359096012" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">16 févr. 2027</div>
+<div><div class="ag-venue">Tom Thumb Theatre</div><div class="ag-city">Margate · Royaume-Uni · 19:30</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/romantic-cello-in-margate-solo-cello-orchestral-arrangements-tickets-2004360712848" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row mine">
+<div class="ag-date">18 févr. 2027</div>
+<div><div class="ag-venue">La Salle Verte</div><div class="ag-city">Douvres · Royaume-Uni · 19:00</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://epicscores.christiangrosselfinger.com/fr/">Epic Scores</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/epic-scores-live-in-dover-film-game-music-live-tickets-2004491808960" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row mine">
+<div class="ag-date">20 févr. 2027</div>
+<div><div class="ag-venue">Le Repère de Torcy</div><div class="ag-city">Torcy · France</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://epicscores.christiangrosselfinger.com/fr/">Epic Scores</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/epic-scores-live-a-torcy-musiques-de-films-et-de-jeux-en-direct-tickets-2004811843191" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">23 févr. 2027</div>
+<div><div class="ag-venue">Macareu</div><div class="ag-city">Porto · Portugal · 21:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/romantic-cello-no-porto-violoncelo-solo-arranjos-orquestrais-tickets-2004490063740" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row mine">
+<div class="ag-date">24 févr. 2027</div>
+<div><div class="ag-venue">Macareu</div><div class="ag-city">Porto · Portugal · 21:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://epicscores.christiangrosselfinger.com/fr/">Epic Scores</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/epic-scores-live-no-porto-musica-de-filmes-e-jogos-ao-vivo-tickets-2004490066749" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">25 févr. 2027</div>
+<div><div class="ag-venue">Macareu</div><div class="ag-city">Porto · Portugal · 21:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-no-porto-violoncelo-rock-pop-tickets-2004490074773" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">10 mars 2027</div>
+<div><div class="ag-venue">Chapelle Notre-Dame de la Réconciliation</div><div class="ag-city">Lille · France · 20:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/romantic-cello-a-lille-violoncelle-solo-arrangements-orchestraux-tickets-2004281252179" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">12 mars 2027</div>
+<div><div class="ag-venue">Fazenda da Esperança – Kloster Mörmter</div><div class="ag-city">Xanten · Allemagne · 18:00</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-xanten-cello-rock-pop-tickets-2004491111875" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row mine">
+<div class="ag-date">13 mars 2027</div>
+<div><div class="ag-venue">Unperfekthaus</div><div class="ag-city">Essen · Allemagne · 19:00</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://epicscores.christiangrosselfinger.com/fr/">Epic Scores</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/epic-scores-live-in-essen-film-game-musik-live-tickets-2003761330078" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">14 mars 2027</div>
+<div><div class="ag-venue">Unperfekthaus</div><div class="ag-city">Essen · Allemagne · 19:00</div><div class="ag-city">Avec 5 Seconds to Move</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-essen-cello-rock-pop-tickets-2003761336096" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">15 mars 2027</div>
+<div><div class="ag-venue">Unperfekthaus</div><div class="ag-city">Essen · Allemagne · 19:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/romantic-cello-in-essen-solo-cello-orchesterarrangements-tickets-2004281771733" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">16 mars 2027</div>
+<div><div class="ag-venue">Péniche La Légia</div><div class="ag-city">Liège · Belgique · 20:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/romantic-cello-a-liege-violoncelle-solo-arrangements-orchestraux-tickets-2003761340108" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row mine">
+<div class="ag-date">17 mars 2027</div>
+<div><div class="ag-venue">Péniche La Légia</div><div class="ag-city">Liège · Belgique · 20:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://epicscores.christiangrosselfinger.com/fr/">Epic Scores</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/epic-scores-live-a-liege-musiques-de-films-et-de-jeux-en-direct-tickets-2003761345123" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">18 mars 2027</div>
+<div><div class="ag-venue">Péniche La Légia</div><div class="ag-city">Liège · Belgique · 20:00</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-a-liege-violoncelle-rock-pop-tickets-2003761377219" rel="noopener" target="_blank">Billets</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">19 mars 2027</div>
+<div><div class="ag-venue">Frankfurter Salon</div><div class="ag-city">Francfort · Allemagne · 19:30</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-in-frankfurt-cello-rock-pop-tickets-2003146110941" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">25 mars 2027</div>
+<div><div class="ag-venue">Agropolis – Cascina Marasco</div><div class="ag-city">Cremona · Italie · 21:00</div><div class="ag-city">Dans le cadre du Luce &amp; Legno Fest — un pont sonore entre le Brésil et l’Italie</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-a-cremona-luce-legno-fest-tickets-2004811833161" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+<div class="ag-row">
+<div class="ag-date">28 mars 2027</div>
+<div><div class="ag-venue">Auditorium Santa Croce al Tempio</div><div class="ag-city">Florence · Italie · 19:30</div><div class="ag-city">Dans le cadre du Luce &amp; Legno Fest — un pont sonore entre le Brésil et l’Italie</div></div>
+<div class="ag-actions"><a class="ag-tag" href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> <a class="ag-ticket" href="https://www.eventbrite.pt/e/cello-storm-a-firenze-luce-legno-fest-tickets-2004810293556" rel="noopener" target="_blank">Réserver</a></div>
+</div>
+</div>
+<p class="ag-note">Tournée européenne · 19 janvier – 28 mars 2027. <strong>Epic Scores</strong> les dates sont mises en évidence ; le reste de la tournée est indiqué pour information. D’autres dates seront annoncées régulièrement.</p>
+<div class="btn-row" style="justify-content:center;margin-top:24px">
+<a class="btn" href="https://bnds.us/ig15j9" rel="noopener" target="_blank">Toutes les dates sur Bandsintown</a>
+</div>
+</div>
+</section>
+<!-- ════════ MAILING LIST ════════ -->
+<section id="subscribe">
+<div class="wrap">
+<div class="center">
+<div class="sec-label">Restons en contact</div>
+<div class="sec-rule"></div>
+</div>
+<div class="ml">
+<p>Nouvelles dates, nouveaux enregistrements et, de temps en temps, un mot depuis la route. Pas plus d’un message par semaine, et jamais partagé avec personne.</p>
+<form action="https://wixsite.us5.list-manage.com/subscribe/post?u=64c858c77c691dbe12c92278c&amp;id=60ce4e72f7" class="ml-form" method="post" novalidate="" target="_blank">
+<input aria-label="Adresse e-mail" name="EMAIL" placeholder="votre@email.com" required="" type="email">
+<div aria-hidden="true" class="ml-hp"><input name="b_64c858c77c691dbe12c92278c_60ce4e72f7" tabindex="-1" type="text" value=""/></div>
+<button name="subscribe" type="submit">S’abonner</button>
+</input></form>
+<p class="ml-small">Christian Grosselfinger · Vous pouvez vous désabonner en un clic depuis n’importe quel e-mail.</p>
+</div>
+</div>
+</section>
+<!-- ════════ FOR VENUES ════════ -->
+<section class="alt" id="venues">
+<div class="wrap">
+<div class="sec-label">Pour les salles &amp; organisateurs</div>
+<div class="sec-rule"></div>
+<p style="max-width:62ch">Epic Scores Live sonne immense et voyage léger. Tout fonctionne en autonomie grâce au système de l’artiste — si vous avez une sonorisation et une table de mixage, il n’y a presque rien à préparer. La formation est flexible, du soliste seul à un groupe complet — contactez-nous pour voir ce qui convient à votre scène.</p>
+<div class="spec">
+<div class="spec-item"><div class="spec-k">Sur scène</div><div class="spec-v">1 à 4 musiciens (flexible)</div></div>
+<div class="spec-item"><div class="spec-k">Durée</div><div class="spec-v">60–90 min, sans pause ou avec entracte</div></div>
+<div class="spec-item"><div class="spec-k">Scène minimale</div><div class="spec-v">3 × 2 m</div></div>
+<div class="spec-item"><div class="spec-k">Installation</div><div class="spec-v">1 heure avec sono et lumières du lieu</div></div>
+<div class="spec-item"><div class="spec-k">Le lieu fournit</div><div class="spec-v">2 × XLR (stéréo) · alimentation sur scène · une chaise sans accoudoirs</div></div>
+<div class="spec-item"><div class="spec-k">Projection</div><div class="spec-v">Écran + vidéoprojecteur HDMI fortement recommandés</div></div>
+</div>
+<p style="margin-top:24px">Les boîtiers DI, le micro et les retours sont apportés par l’artiste ; une table à 2 canaux suffit. Un plan de feu DMX complet est disponible sur demande.</p>
+<div class="btn-row">
+<a class="btn key" href="mailto:info@christiangrosselfinger.com?subject=Epic%20Scores%20Live%20—%20Booking%20enquiry">Demande de réservation</a>
+</div>
+</div>
+</section>
+<!-- ════════ LISTEN ════════ -->
+<section id="listen">
+<div class="wrap">
+<div class="center">
+<div class="sec-label">Écouter &amp; suivre</div>
+<div class="sec-rule"></div>
+</div>
+<div class="links">
+<a class="link-card" href="https://open.spotify.com/artist/0w6EcnHEJUxbB748ddGuq4" rel="noopener" target="_blank">Spotify</a>
+<a class="link-card" href="https://music.apple.com/br/artist/christian-grosselfinger/669639871?l=en" rel="noopener" target="_blank">Apple Music</a>
+<a class="link-card" href="https://www.youtube.com/c/ChristianGrosselfinger" rel="noopener" target="_blank">YouTube</a>
+<a class="link-card" href="https://instagram.com/iamchrisgrosselfinger" rel="noopener" target="_blank">Instagram</a>
+<a class="link-card" href="https://m.facebook.com/christiangrosselfinger" rel="noopener" target="_blank">Facebook</a>
+<a class="link-card" href="https://www.tiktok.com/@chrisgrosselfingercello" rel="noopener" target="_blank">TikTok</a>
+<a class="link-card" href="https://christiangrosselfinger.bandcamp.com" rel="noopener" target="_blank">Bandcamp</a>
+<a class="link-card" href="https://www.patreon.com/christiangrosselfinger" rel="noopener" target="_blank">Patreon</a>
+</div>
+</div>
+</section>
+<!-- ════════ FOOTER ════════ -->
+<footer>
+<div class="wrap">
+<a aria-label="Christian Grosselfinger — accueil" class="fname-link" href="https://christiangrosselfinger.github.io/fr/">
+<img alt="Christian Grosselfinger" class="fname" src="/assets/Logos/Chris/chrisgrosselfinger_logo_video_Nomefundopreto_transparente.png"/>
+</a>
+<div class="fmeta">
+<a href="mailto:info@christiangrosselfinger.com">info@christiangrosselfinger.com</a><br/>
+<a href="tel:+393246097709">+39 324 6097709</a><br/>
+<a href="https://www.christiangrosselfinger.com">www.christiangrosselfinger.com</a>
+</div>
+<div class="fcopy"><a href="https://cellostorm.christiangrosselfinger.com/fr/">Cello Storm</a> ·
+      <a class="here" href="https://epicscores.christiangrosselfinger.com/fr/">Epic Scores Live</a> ·
+      <a href="https://romanticcello.christiangrosselfinger.com/fr/">Romantic Cello</a></div>
+</div>
+</footer>
+</body>
+</html>
