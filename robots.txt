@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://epicscores.christiangrosselfinger.com/sitemap.xml
